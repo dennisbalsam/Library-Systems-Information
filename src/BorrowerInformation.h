@@ -38,6 +38,6 @@ class BorrowerInformation
 		string getPhoneNumber(){ return phoneNumber; };
 		string getId(){ return id; };
 		double getFeeBalance(){ return feeBalance; };
-		// get book
-		bool getBook();
+		// get book: find book by name, return pointer from vector
+		bool getBook(const string &bookName);
 };
