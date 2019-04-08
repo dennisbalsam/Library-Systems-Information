@@ -27,6 +27,8 @@ class BorrowerInformation
 		void setPhoneNumber(const string &p){ phoneNumber = p; };
 		void setId(const string &i){ id = i; };
 		void setFeeBalance(const double &f){ feeBalance = f; };
+		// add book to borrower's books
+		void addBook(BookInformation *book){ books.push_back(book); };
 		// set book properties: find book by name, then set.
 		bool setBookStatus(const string &bookName);
 		bool setBookFine(const string &bookName);
