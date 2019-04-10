@@ -1,4 +1,9 @@
 #pragma once
+#include <iostream>
+
+using namespace std;
 
 // TEMP
-struct BookInformation{};
+struct BookInformation{
+    string title;
+};

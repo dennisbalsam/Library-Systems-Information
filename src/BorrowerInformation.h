@@ -29,10 +29,6 @@ class BorrowerInformation
 		void setFeeBalance(const double &f){ feeBalance = f; };
 		// add book to borrower's books
 		void addBook(BookInformation *book){ books.push_back(book); };
-		// set book properties: find book by name, then set.
-		bool setBookStatus(const string &bookName);
-		bool setBookFine(const string &bookName);
-		bool setBookDueDate(const string &bookName);
 
 		// getters
 		string getName(){ return name; };
@@ -40,6 +36,14 @@ class BorrowerInformation
 		string getPhoneNumber(){ return phoneNumber; };
 		string getId(){ return id; };
 		double getFeeBalance(){ return feeBalance; };
-		// get book: find book by name, return pointer from vector
-		bool getBook(const string &bookName);
+		// check if borrower has book
+		bool hasBook(const string &bookname)
+		{
+			for(auto book : books)
+			{
+				if(book->title == bookname)
+					return true;
+			}
+				return false;
+		};
 };
