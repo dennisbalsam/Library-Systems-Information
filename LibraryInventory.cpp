@@ -6,9 +6,6 @@
 using namespace std;
 
 //Function to search the inventory of books
-// EDIT
-// searchInventory returns a reference, but fn type is ptr
-// - a ptr is an address that can be "dereferenced", don't know if a bare address (not a ptr) carries type info and other data like a ptr does.
 BookInformation *LibraryInventory::searchInventory(string title)
 {
 
@@ -17,8 +14,6 @@ BookInformation *LibraryInventory::searchInventory(string title)
 	{
 		if (title == BookInventory[x].getTitle())
 		{
-			// EDIT
-			// returning address of
 			return &BookInventory[x];
 		}
 	}

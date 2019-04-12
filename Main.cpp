@@ -13,7 +13,6 @@ int main()
 	LibraryInventory L1;
 	L1.setBookInventory("Input.txt");
 
-	// EDIT
 	// BB1 is a BookInformation ptr
 	BookInformation * BB1 = L1.searchInventory("life");
 
