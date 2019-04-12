@@ -60,7 +60,7 @@ public:
 	int getLocation();
 	int getStatus();
 	int getCirculationPeriod();
-
+	int getID(); 
 
 	double getCostOfBook();
 	double getFinePerDayOverdue();
