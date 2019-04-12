@@ -1,3 +1,4 @@
+
 #include <iostream>
 
 using namespace std;
@@ -81,4 +82,4 @@ public:
 	}
 };
 
-#pragma once
+

@@ -1,5 +1,5 @@
-#pragma once
 
+#pragma once
 
 #include <string>
 #include "Date.h"
@@ -9,6 +9,7 @@ using namespace std;
 class BookInformation
 {
 private:
+
 	string title, author, subject, publisher;
 	Date publishingDate, dueDate;
 	int status, circulationPeriod, location, id;
@@ -26,10 +27,13 @@ public:
 		finePerDayOverdue = 0;
 	}
 
+
 	void setTitle(string t);
 	void setAuthor(string a);
 	void setSubject(string s);
+
 	void setID(int i);
+
 	void setPublisher(string p);
 
 	void setPublishingDate(Date d);
@@ -46,6 +50,8 @@ public:
 	string getTitle();
 	string getAuthor();
 	string getSubject();
+
+
 	string getPublisher();
 
 	Date getPublishingDate();
@@ -54,12 +60,10 @@ public:
 	int getLocation();
 	int getStatus();
 	int getCirculationPeriod();
-	int getID();
+
 
 	double getCostOfBook();
 	double getFinePerDayOverdue();
 
 	void print();
 };
-
-
