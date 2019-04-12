@@ -18,7 +18,7 @@ BookInformation *LibraryInventory::searchInventory(string title)
 		}
 	}
 
-
+	return nullptr; // book was not found
 }
 
 //Function to serach for borrower
