@@ -8,7 +8,7 @@ BookInformation::BookInformation()
 	publisher = "Null";
 	publishingDate = Date(0, 0, 0);
 	dueDate = Date(0, 0, 0);
-	status = 1;
+	Status status = AVAILABLE;
 	circulationPeriod = 0;
 	location = 0;
 	costOfBook = 0.0;
@@ -34,7 +34,7 @@ void BookInformation::setFinePerDayOverdue() { finePerDayOverdue = 0.05 * costOf
 void BookInformation::setCostOfBook(double c) { costOfBook = c; }
 
 void BookInformation::setLocation(int l) { location = l; }
-void BookInformation::setStatus(int s) { status = s; }
+void BookInformation::setStatus(Status s) { status = s; }
 void BookInformation::setCirculationPeriod(int c) { circulationPeriod = c; }
 
 //Accessor Function Definitions
@@ -55,7 +55,7 @@ int BookInformation::getID() { return id; }
 
 
 int BookInformation::getLocation() { return location; }
-int BookInformation::getStatus() { return status; }
+Status BookInformation::getStatus() { return status; }
 int BookInformation::getCirculationPeriod() { return circulationPeriod; }
 
 void BookInformation::print()

@@ -30,7 +30,7 @@ class LibraryInventory
 			void setBookInventory(string);
 
 			//Function to alter the of books in the book inventory
-			void changeStatus(int newStatus, BookInformation * Book);
+			void changeStatus(Status newStatus, BookInformation * Book);
 
 			//Functions to withdraw and return books 
 			bool withdrawBook(BorrowerInformation * B1, string title, Date todaysDate);
