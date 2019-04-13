@@ -36,26 +36,10 @@ BorrowerInformation *LibraryInventory::getBorrower(int id)
 
 
 //Function to change status
-void LibraryInventory::changeStatus(int newStatus, BookInformation * Book)
+void LibraryInventory::changeStatus(Status newStatus, BookInformation * Book)
 {
-
-
-	//Switch statement to change the status based on the action 
-	switch (newStatus)
-	{
-	case 0:
-		Book->setStatus(0);
-		break;
-	case 1:
-		Book->setStatus(1);
-		break;
-	case 2:
-		Book->setStatus(2);
-		break;
-	case 3:
-		Book->setStatus(3);
-		break;
-	}
+	if(Book) // if book is not nullptr
+		Book->setStatus(newStatus);
 }
 
 //Function to import the books
@@ -102,18 +86,13 @@ bool LibraryInventory::withdrawBook(BorrowerInformation * B1, string title, Date
 	BookInformation * book = searchInventory(title);
 
 	//Statement to return false if book is unavailable 
-	if (book->getStatus() == 0 || book->getStatus() == 2 || book->getStatus() == 3)
-	{
+	// if book is nullptr or has status != AVAILABLE
+	if(!book || book->getStatus() != AVAILABLE)
 		return false;
-	}
-
-
-
 	else {
 
-
 		//Set the due date based on the circulation period and the current date
-		book->setStatus(0);
+		book->setStatus(UNAVAILABLE);
 		book->setCirculationPeriod(14);
 		//Set the due date, and fine per day
 		todaysDate.increaseDate(14);
@@ -143,7 +122,7 @@ void LibraryInventory::returnBook(BorrowerInformation * B1, string title, Date t
 		B1->setFeeBalance(fee);
 
 	//Change the book status
-	book->setStatus(1);
+	book->setStatus(AVAILABLE);
 
 	//Change circulation period to 0
 	book->setCirculationPeriod(0);

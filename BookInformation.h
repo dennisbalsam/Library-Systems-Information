@@ -1,4 +1,3 @@
-
 #pragma once
 
 #include <string>
@@ -6,13 +5,17 @@
 #include <iostream>
 using namespace std;
 
+// book statuses
+enum Status { UNAVAILABLE, AVAILABLE, HOLD, MAINTENANCE, TOTAL_STATUS };
+
 class BookInformation
 {
 private:
 
 	string title, author, subject, publisher;
 	Date publishingDate, dueDate;
-	int status, circulationPeriod, location, id;
+	Status status;
+	int circulationPeriod, location, id;
 	double costOfBook, finePerDayOverdue;
 public:
 	BookInformation();
@@ -20,7 +23,7 @@ public:
 	{ 
 		publishingDate = Date(0,0,0); 
 		dueDate = Date(0, 0, 0);
-		status = 1;
+		status = AVAILABLE;
 		circulationPeriod = 0;
 		location = 0;
 		costOfBook = 0.0;
@@ -40,7 +43,7 @@ public:
 	void setDueDate(Date d);
 
 	void setLocation(int l);
-	void setStatus(int s); // int values: [ 0: Unavailable / 1: Available / 2: Hold / 3: Maintenance ]
+	void setStatus(Status s); // int values: [ 0: Unavailable / 1: Available / 2: Hold / 3: Maintenance ]
 	void setCirculationPeriod(int c); // int value in amount of DAYS
 
 	void setCostOfBook(double c); // $ - . - -
@@ -58,7 +61,7 @@ public:
 	Date getDueDate();
 
 	int getLocation();
-	int getStatus();
+	Status getStatus();
 	int getCirculationPeriod();
 	int getID(); 
 
