@@ -26,7 +26,7 @@ class LibraryInventory
 		
 		//Search the inventory of books
 			BookInformation * searchInventory(string title);
-			//Set the inventory
+			//Set the inventory of books and users
 			void setBookInventory(string);
 
 			//Function to alter the of books in the book inventory

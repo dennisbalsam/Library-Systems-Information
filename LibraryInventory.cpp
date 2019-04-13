@@ -83,6 +83,7 @@ void LibraryInventory::setBookInventory(string name)
 
 }
 
+
 //Function to withdraw the book
 bool LibraryInventory::withdrawBook(BorrowerInformation * B1, string title, Date todaysDate)
 {
@@ -99,7 +100,7 @@ bool LibraryInventory::withdrawBook(BorrowerInformation * B1, string title, Date
 		book->setStatus(UNAVAILABLE);
 		book->setCirculationPeriod(14);
 		//Set the due date, and fine per day
-		todaysDate.increaseDate(14);
+		todaysDate.increaseDate(book->getCirculationPeriod());
 
 		book->setDueDate(todaysDate);
 		book->setFinePerDayOverdue(3.00);
@@ -141,7 +142,11 @@ bool LibraryInventory::returnBook(BorrowerInformation * B1, string title, Date t
 	//Remove the book from the borrowers list
 	B1->returnBook(book);
 
+	delete book;
+
 	return true;
+
+
 }
 
 

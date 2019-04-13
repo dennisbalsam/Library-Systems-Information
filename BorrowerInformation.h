@@ -55,5 +55,11 @@ public:
 		}
 		return false;
 	};
+
+	//returns the amount of books a borrwer has
+	int getBookAmount()
+	{
+		return books.size();
+	}
 	
 };
