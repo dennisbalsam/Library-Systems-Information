@@ -4,7 +4,7 @@ line = f.readline();
 print(line, end="");
 
 line = f.readline();
-text = ["5", "15", "3", "10", "7", "14", "8", "20"];
+text = ["1","2","3","4"];
 
 i = 0;
 while line:
