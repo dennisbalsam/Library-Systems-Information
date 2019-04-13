@@ -1,10 +1,10 @@
-f = open("book-data-edit.csv");
+f = open("book-data.csv");
 
 line = f.readline();
 print(line, end="");
 
 line = f.readline();
-text = [ "Random House", "Harper Collins", "Oxford Press", "Simon & Schuster", "Bloomsbury", "Springer", "Penguin Classics"];
+text = ["Fantasy", "Science Fiction", "Mystery", "Biography", "Satire", "Horror", "Memoir", "Romance","Fable","Historical Fiction","Poetry"];
 
 i = 0;
 while line:
