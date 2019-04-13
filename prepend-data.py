@@ -4,7 +4,7 @@ line = f.readline();
 print(line, end="");
 
 line = f.readline();
-text = ["1","2","3","4"];
+text = ["10.95", "20.00", "5.00", "16.69", "22.16","13.25","16.70","25.50","5.50"];
 
 i = 0;
 while line:
