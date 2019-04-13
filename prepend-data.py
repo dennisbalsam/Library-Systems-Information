@@ -4,7 +4,7 @@ line = f.readline();
 print(line, end="");
 
 line = f.readline();
-text = ["Fantasy", "Science Fiction", "Mystery", "Biography", "Satire", "Horror", "Memoir", "Romance","Fable","Historical Fiction","Poetry"];
+text = ["5", "15", "3", "10", "7", "14", "8", "20"];
 
 i = 0;
 while line:
