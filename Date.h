@@ -10,8 +10,10 @@ private:
 	int day, month, year;
 public:
 	Date() : day(0), month(0), year(0) {}
-	Date(int m, int d, int y) : day(d), month(m), year(y) {}
-	void setDay(int d) { day = d; }
+	Date(int m, int d, int y): month(m), day(d), year(y)
+	{
+	}
+	void setDay(int d)  {day = d; }
 	void setMonth(int m) { month = m; }
 	void setYear(int y) { year = y; }
 	void setDate (int m, int d, int y) { day = d; month = m; year = y; }

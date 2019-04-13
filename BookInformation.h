@@ -19,9 +19,9 @@ private:
 	double costOfBook, finePerDayOverdue;
 public:
 	BookInformation();
-	BookInformation(string t, string a, string s, string p, int i) : title(t), author(a), subject(s), publisher(p), id(i) 
-	{ 
-		publishingDate = Date(0,0,0); 
+	BookInformation(string t, string a, string s, string p, int i) : title(t), author(a), subject(s), publisher(p), id(i)
+	{
+		publishingDate = Date(0, 0, 0);
 		dueDate = Date(0, 0, 0);
 		status = AVAILABLE;
 		circulationPeriod = 0;
@@ -63,7 +63,7 @@ public:
 	int getLocation();
 	Status getStatus();
 	int getCirculationPeriod();
-	int getID(); 
+	int getID();
 
 	double getCostOfBook();
 	double getFinePerDayOverdue();
