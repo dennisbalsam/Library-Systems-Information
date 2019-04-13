@@ -110,10 +110,14 @@ bool LibraryInventory::withdrawBook(BorrowerInformation * B1, string title, Date
 }
 
 //Function to return books
-void LibraryInventory::returnBook(BorrowerInformation * B1, string title, Date todaysDate)
+bool LibraryInventory::returnBook(BorrowerInformation * B1, string title, Date todaysDate)
 {
 	//Find desired book 
 	BookInformation * book = searchInventory(title);
+
+	// if book was not found
+	if(!book)
+		return false;
 
 	//Check if it is late, if so add a fee to the users account
 	int daysOverdue = todaysDate.dateDiff(book->getDueDate());
@@ -133,6 +137,7 @@ void LibraryInventory::returnBook(BorrowerInformation * B1, string title, Date t
 	//Remove the book from the borrowers list
 	B1->returnBook(book);
 
+	return true;
 }
 
 

@@ -35,7 +35,7 @@ class LibraryInventory
 			//Functions to withdraw and return books 
 			bool withdrawBook(BorrowerInformation * B1, string title, Date todaysDate);
 
-			void returnBook(BorrowerInformation * B1, string title, Date todaysDate);
+			bool returnBook(BorrowerInformation * B1, string title, Date todaysDate);
 
 			//FUnction to create borrower
 			void addBorrower(string, string, string, int); 
