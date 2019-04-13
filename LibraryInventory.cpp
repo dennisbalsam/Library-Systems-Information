@@ -25,10 +25,14 @@ BookInformation *LibraryInventory::searchInventory(string title)
 BorrowerInformation *LibraryInventory::getBorrower(int id)
 { 
 	for (int i = 0; i < BorrowerList.size(); i++)
+	{
 		if (id == BorrowerList[i].getId())
 		{
 			return &BorrowerList[i]; 
 		}
+	}
+	// borrower not found
+	return nullptr;
 
 }
 
