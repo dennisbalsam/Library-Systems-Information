@@ -32,9 +32,8 @@ public:
 		cout << "List of books withdrawn: " << endl;
 		for(auto book : b.books)
 		{
-			cout << book << endl;
+			cout << "\t" << book->getTitle() << endl;
 		}
-		cout << "End list of books withdrawn." << endl;
 
 		return os;
 	}
