@@ -30,6 +30,22 @@ public:
 		finePerDayOverdue = 0;
 	}
 
+	friend ostream& operator<<(ostream& os, BookInformation& b)
+	{
+		os << "Title: " << b.getTitle() << endl;
+		os << "Author: " << b.getAuthor() << endl;
+		os << "Subject: " << b.getSubject() << endl;
+		os << "Publisher: " << b.getPublisher() << endl;
+		os << "Publisblishing date: " << b.getPublishingDate() << endl;
+		os << "Due date: " << b.getDueDate() << endl;
+		os << "Circulation period: " << b.getCirculationPeriod() << endl;
+		os << "Location: " << b.getLocation() << endl;
+		os << "ID: " << b.getID() << endl;
+		os << "Cost: " << b.getCostOfBook() << endl;
+		os << "Overdue fine: " << b.getFinePerDayOverdue() << endl;
+		return os;
+	}
+
 
 	void setTitle(string t);
 	void setAuthor(string a);
