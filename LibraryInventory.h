@@ -45,6 +45,17 @@ class LibraryInventory
 			//Function get book info
 			BorrowerInformation * getBorrower(int id);
 
+			// functions to display lists
+			void printBookInventory()
+			{
+				for( auto book : BookInventory)
+					cout << book.getTitle() << endl;
+			};
+			void printBorrowerList()
+			{
+				for( auto borrower : BorrowerList)
+					cout << "Name: " << borrower.getName() << " ID: " << borrower.getId() << endl;
+			};
 
 };
 
