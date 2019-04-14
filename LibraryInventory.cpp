@@ -6,7 +6,7 @@
 
 using namespace std;
 
-enum bookAttributes { TITLE, AUTHOR, SUBJECT, PUBLISHER, ID};
+enum bookAttributes { TITLE, AUTHOR, SUBJECT, PUBLISHER, PUBLISHINGDATE, ID, FINEPERDAYOVERDUE, COSTOFBOOK, LOCATION, CIRCULATIONPERIOD };
 
 //Function to search the inventory of books
 BookInformation *LibraryInventory::searchInventory(string title)
@@ -87,16 +87,26 @@ void LibraryInventory::setBookInventory(string name)
 			firstLine = false;
 		else
 		{
-			/*
-				expected data shape:
-				title, author, subject, publisher, publishingDate, id, finePerDayOverdue, costOfBook, location, circulationPeriod
-			*/
-
 			while(getline(ss, tok, ',')) // comma delimiter
 			{
 				lineTokens.push_back(tok);
 			}
-				BookInventory.push_back(BookInformation(lineTokens[TITLE], lineTokens[AUTHOR], lineTokens[SUBJECT], lineTokens[PUBLISHER], 0)); 
+				BookInventory.push_back(BookInformation(lineTokens[TITLE], lineTokens[AUTHOR], lineTokens[SUBJECT], lineTokens[PUBLISHER], atoi(lineTokens[ID].c_str()))); 
+
+				// set publishing date
+				BookInventory.back().setPublishingDate( Date(1,2,atoi(lineTokens[PUBLISHINGDATE].c_str())) );
+				
+				// set circulation period
+				BookInventory.back().setCirculationPeriod(atoi(lineTokens[CIRCULATIONPERIOD].c_str()));
+
+				// set location
+				BookInventory.back().setLocation(atoi(lineTokens[LOCATION].c_str()));
+
+				// set cost of book
+				BookInventory.back().setCostOfBook(atoi(lineTokens[COSTOFBOOK].c_str()));
+
+				// set fine
+				BookInventory.back().setFinePerDayOverdue(atoi(lineTokens[FINEPERDAYOVERDUE].c_str()));
 
 				lineTokens.clear();
 		}

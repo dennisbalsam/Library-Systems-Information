@@ -10,13 +10,7 @@ int main()
 
 	BookInformation *b = l.searchInventory("Twilight");
 	if(b)
-	{
-		cout << b->getTitle() << endl;
-		cout << b->getAuthor() << endl;
-		cout << b->getSubject() << endl;
-		cout << b->getPublisher() << endl;
-	}
-	
+		cout << *b << endl;
 
 	return 0;
 }
