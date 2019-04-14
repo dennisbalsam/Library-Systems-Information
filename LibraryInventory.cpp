@@ -1,9 +1,12 @@
 #include "LibraryInventory.h"
 #include "Date.h"
 #include <fstream>
+#include <sstream>
 #include <algorithm>
 
 using namespace std;
+
+enum bookAttributes { TITLE, AUTHOR, SUBJECT, PUBLISHER, ID};
 
 //Function to search the inventory of books
 BookInformation *LibraryInventory::searchInventory(string title)
@@ -50,7 +53,7 @@ void LibraryInventory::changeStatus(Status newStatus, BookInformation * Book)
 void LibraryInventory::setBookInventory(string name)
 {
 	//Temp strings
-	string title, author, subject,publisher; 
+	string title, author, subject, publisher; 
 	//int to input books 
 	int currentBook = 0, id = 0;
 
@@ -68,12 +71,36 @@ void LibraryInventory::setBookInventory(string name)
 		exit(1);
 	}
 
-	//Push each book into the vector
-	while (!infile.eof())
+	// tokenize file
+	// Then push each book into the vector
+
+	string line; // file line buffer
+	string tok; // line token buffer
+	bool firstLine = true; // if first line of data
+	vector<string> lineTokens; // tokens found in line
+	while(getline(infile, line)) // newline delimiter
 	{
-		id = rand() % 90000 + 10000;
-		infile >> title >> author >> subject >> publisher;
-		BookInventory.push_back(BookInformation(title, author, subject, publisher, id)); 
+		stringstream ss(line); // stringstream from line
+
+		// handling first line of data (do not import)
+		if(firstLine)
+			firstLine = false;
+		else
+		{
+			/*
+				expected data shape:
+				title, author, subject, publisher, publishingDate, id, finePerDayOverdue, costOfBook, location, circulationPeriod
+			*/
+
+			while(getline(ss, tok, ',')) // comma delimiter
+			{
+				lineTokens.push_back(tok);
+			}
+				BookInventory.push_back(BookInformation(lineTokens[TITLE], lineTokens[AUTHOR], lineTokens[SUBJECT], lineTokens[PUBLISHER], 0)); 
+
+				lineTokens.clear();
+		}
+
 	}
 
 	//CLose the file
