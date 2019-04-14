@@ -16,7 +16,8 @@ int main()
 
 	// test borrower info import
 	BorrowerInformation *b2 = l.getBorrower(16800);
-	cout << b2->getAddress() << endl;
+	if(b2)
+		cout << *b2 << endl;
 
 	return 0;
 }

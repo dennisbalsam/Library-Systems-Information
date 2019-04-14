@@ -20,6 +20,24 @@ public:
 	// general constructor: requires at least a name
 	BorrowerInformation(const string &n, const string &a = "NO_ADDRESS", const string &p = "NO_PHONENUMBER", const int &i = 0, const double &f = 0) : name(n), address(a), phoneNumber(p), id(i), feeBalance(f) {};
 
+	// overloaded output op
+	friend ostream& operator<<(ostream& os, BorrowerInformation& b)
+	{
+		cout << "Name: " << b.name << endl;
+		cout << "Address: " << b.address << endl;
+		cout << "Phone Number: " << b.phoneNumber << endl;
+		cout << "ID: " << b.id << endl;
+		cout << "Fee balance: " << b.feeBalance << endl;
+		cout << "Books withdrawn: " << b.getBookAmount() << endl;
+		cout << "List of books withdrawn: " << endl;
+		for(auto book : b.books)
+		{
+			cout << book << endl;
+		}
+		cout << "End list of books withdrawn." << endl;
+
+		return os;
+	}
 	// setters
 	void setName(const string &n) { name = n; };
 	void setAddress(const string &a) { address = a; };
