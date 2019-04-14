@@ -28,6 +28,8 @@ class LibraryInventory
 			BookInformation * searchInventory(string title);
 			//Set the inventory of books and users
 			void setBookInventory(string);
+			// set list of borrowers
+			void setBorrowerList(string);
 
 			//Function to alter the of books in the book inventory
 			void changeStatus(Status newStatus, BookInformation * Book);

@@ -6,7 +6,9 @@
 
 using namespace std;
 
+// attribute enums: used to index line vector when importing csv data
 enum bookAttributes { TITLE, AUTHOR, SUBJECT, PUBLISHER, PUBLISHINGDATE, ID, FINEPERDAYOVERDUE, COSTOFBOOK, LOCATION, CIRCULATIONPERIOD };
+enum borrowerAttributes { NAME, ADDRESS, PHONENUMBER, BORROWER_ID };
 
 //Function to search the inventory of books
 BookInformation *LibraryInventory::searchInventory(string title)
@@ -78,7 +80,7 @@ void LibraryInventory::setBookInventory(string name)
 	string tok; // line token buffer
 	bool firstLine = true; // if first line of data
 	vector<string> lineTokens; // tokens found in line
-	while(getline(infile, line)) // newline delimiter
+	while(getline(infile, line)) // get each row by newline delimiter
 	{
 		stringstream ss(line); // stringstream from line
 
@@ -87,11 +89,14 @@ void LibraryInventory::setBookInventory(string name)
 			firstLine = false;
 		else
 		{
-			while(getline(ss, tok, ',')) // comma delimiter
+			while(getline(ss, tok, ',')) // get each token by comma delimiter
 			{
-				lineTokens.push_back(tok);
+				lineTokens.push_back(tok); // save in line vector
 			}
+				// push back constructed book
 				BookInventory.push_back(BookInformation(lineTokens[TITLE], lineTokens[AUTHOR], lineTokens[SUBJECT], lineTokens[PUBLISHER], atoi(lineTokens[ID].c_str()))); 
+
+				/* set book members not set by constructor */
 
 				// set publishing date
 				BookInventory.back().setPublishingDate( Date(1,2,atoi(lineTokens[PUBLISHINGDATE].c_str())) );
@@ -108,6 +113,7 @@ void LibraryInventory::setBookInventory(string name)
 				// set fine
 				BookInventory.back().setFinePerDayOverdue(atoi(lineTokens[FINEPERDAYOVERDUE].c_str()));
 
+				// clear line vector to prepare for next line
 				lineTokens.clear();
 		}
 
@@ -120,6 +126,58 @@ void LibraryInventory::setBookInventory(string name)
 
 }
 
+//Function to import borrower info
+void LibraryInventory::setBorrowerList(string filename)
+{
+	//Temp strings
+	string name, address, phone; 
+
+	//Declare inpput file name
+	ifstream infile;
+
+	//open the file
+	infile.open(filename);
+
+	//Make sure the file opened
+	if (infile.fail())
+	{
+		cout << "Input file did not open" << endl;
+		exit(1);
+	}
+
+	// tokenize file
+	// Then push each book into the vector
+
+	string line; // file line buffer
+	string tok; // line token buffer
+	bool firstLine = true; // if first line of data
+	vector<string> lineTokens; // tokens found in line
+	while(getline(infile, line)) // newline delimiter
+	{
+		stringstream ss(line); // stringstream from line
+
+		// handling first line of data (do not import)
+		if(firstLine)
+			firstLine = false;
+		else
+		{
+			while(getline(ss, tok, ',')) // comma delimiter
+			{
+				lineTokens.push_back(tok);
+			}
+				BorrowerList.push_back(BorrowerInformation(lineTokens[NAME], lineTokens[ADDRESS], lineTokens[PHONENUMBER], atoi(lineTokens[BORROWER_ID].c_str())));
+
+				lineTokens.clear();
+		}
+
+	}
+
+	//CLose the file
+	infile.close();
+
+
+
+}
 
 //Function to withdraw the book
 bool LibraryInventory::withdrawBook(BorrowerInformation * B1, string title, Date todaysDate)
