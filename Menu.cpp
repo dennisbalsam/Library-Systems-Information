@@ -157,63 +157,82 @@ void Menu::WithdrawBook()
 	//Prompt librarian for input of information
 	cout << "Please enter the 4 digit borrower ID: ";
 	cin >> id;
-	cout << "Please Enter todays date (in format m d y): ";
-	cin >> month >> day >> year;
+
+	// check if correct date format
+	bool goodDate = false;
+
+	int months31[] = {1, 3, 5, 7, 8, 10, 12};
+	int months30[] = {4, 6, 9, 11};
+	do
+	{
+		goodDate = true;
+
+		cout << "Please Enter todays date (in format m d y) ";
+		cin >> month >> day >> year;
+
+		// check month
+		if(month < 1 || month > 12)
+		{
+			cout << "Invalid month." << endl;
+			goodDate = false;
+		}
+
+		// check year
+		if(year < 2019)
+		{
+			cout << "Invalid year." << endl;
+			goodDate = false;
+		}
+
+		// check day
+		if(day < 1)
+		{
+			cout << "Invalid day." << endl;
+			goodDate = false;
+		}
+
+		// check 31 day months
+		for(int i = 0; i < sizeof(months31)/sizeof(months31[0]); i++)
+		{
+			if(month == months31[i])
+			{
+				if(day > 31)
+				{
+					cout << "Invalid day." << endl;
+					goodDate = false;
+				}
+				break;
+			}
+		}
+
+		// check 30 day months
+		for(int i = 0; i < sizeof(months30)/sizeof(months30[0]); i++)
+		{
+			if(month == months30[i])
+			{
+				if(day > 30)
+				{
+					cout << "Invalid day." << endl;
+					goodDate = false;
+				}
+			}
+		}
+
+		// check 28 day month
+		if(month == 2 && day > 28)
+		{
+				cout << "Invalid day." << endl;
+				goodDate = false;
+		}
+
+	} while(!goodDate);
+
 	cout << "Please enter the title of the book: ";
 	cin >> title;
 	system("cls");
 
 
-	//Ensure i aproper month is entered
-	if (month < 1 || month > 12)
-	{
-		cout << "Please enter a valid month: ";
-		cin >> month;
-	}
 
-
-	//Ensure a proper day is entered
-	switch (month)
-	{
-	case 1:
-	case 3:
-	case 5:
-	case 7:
-	case 8:
-	case 10:
-	case 12:
-		if (day < 1 || day > 31)
-		{
-			cout << "Please enter a valid day: ";
-			cin >> day;
-		}
-		break;
-	case 4:
-	case 6:
-	case 9:
-	case 11:
-		if (day < 1 || day > 30)
-		{
-			cout << "Please enter a valid day: ";
-			cin >> day;
-		}
-
-		break;
-
-	case 2:
-		if (day < 1 || day > 28)
-		{
-			cout << "Please enter a valid day: ";
-			cin >> day;
-		}
-		break;
-
-		if (year < 2019)
-		{
-			cout << "Please enter a valid year";
-			cin >> year;
-		}
-	}
 		//Search for borrower
 	do {
 		CurrentBorrower = LibraryData.getBorrower(id);
@@ -250,12 +269,12 @@ void Menu::SearchBookInventory()
 	
 	do
 	{
+		CurrentBook = LibraryData.searchInventory(title);
 		if (CurrentBook == nullptr)
 		{
 			cout << "we don't have that book in our library, please enter another book: " << endl;
 			cin >> title;
 		}
-		CurrentBook = LibraryData.searchInventory(title);
 	} while (CurrentBook == nullptr);
 	
 
@@ -265,8 +284,6 @@ void Menu::SearchBookInventory()
 	cout << "Its status is " << CurrentBook->getStatus() << endl;
 
 	system("cls"); 
-
-	delete CurrentBook;
 }
 
 void Menu::ViewInfo()
