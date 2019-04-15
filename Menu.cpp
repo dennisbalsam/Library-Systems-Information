@@ -302,8 +302,8 @@ void Menu::ViewInfo()
 
 	switch (input)
 	{
-	case 'I':
-	case 'i':
+	case 'A':
+	case 'a':
 		cout << "Creating new user" << endl;
 		cout << "------------------" << endl;
 		//Enter the borrwer name
@@ -327,20 +327,20 @@ void Menu::ViewInfo()
 		cout << "You are now a member of our library!!" << endl;
 		break;
 
-	case 'A':
-	case 'a':
+	case 'I':
+	case 'i':
 		//Ask the borrower for their ID, and input it to the system
 		cout << "Enter the users ID: " ;
 		cin >> id;
 
 		//Search for User
 		do {
+			CurrentBorrower = LibraryData.getBorrower(id);
 			if (CurrentBorrower == nullptr)
 			{
 				cout << "That is not a valid ID, please enter another ID: " << endl;
 				cin >> id;
 			}
-			CurrentBorrower = LibraryData.getBorrower(id);
 		} while (CurrentBorrower == nullptr);
 		//Output UserInfo
 		cout << "Borrower Name: " << CurrentBorrower->getName() << endl;
