@@ -9,7 +9,8 @@ void Menu::MainMenu()
 	char librarianInput;
 	bool backtoMenu = true;
 	//Input all data for the library
-	LibraryData.setBookInventory("Input.txt");
+	LibraryData.setBookInventory("book-data.csv");
+	LibraryData.setBorrowerList("borrower-data.csv");
 
 
 
@@ -215,12 +216,12 @@ void Menu::WithdrawBook()
 	}
 		//Search for borrower
 	do {
+		CurrentBorrower = LibraryData.getBorrower(id);
 		if (CurrentBorrower == nullptr)
 		{
 			cout << "That is not a valid ID, please enter another ID: " << endl;
 			cin >> id;
 		}
-		CurrentBorrower = LibraryData.getBorrower(id);
 	} while (CurrentBorrower == nullptr);
 		//call return book function
 	if (LibraryData.withdrawBook(CurrentBorrower, title, Date(month, day, year)) == true)
