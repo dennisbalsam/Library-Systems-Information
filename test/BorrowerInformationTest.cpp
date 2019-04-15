@@ -1,8 +1,8 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include "../src/BookInformation.h"
-#include "../src/BorrowerInformation.h"
+#include "../BookInformation.h"
+#include "../BorrowerInformation.h"
 
 using namespace std;
 
