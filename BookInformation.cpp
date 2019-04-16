@@ -58,9 +58,5 @@ int BookInformation::getLocation() { return location; }
 Status BookInformation::getStatus() { return status; }
 int BookInformation::getCirculationPeriod() { return circulationPeriod; }
 
-void BookInformation::print()
-{
-	cout << "Title: " << title << " Author: " << author << " ID: " << id << endl;
 
-}
 
