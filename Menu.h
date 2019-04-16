@@ -4,6 +4,7 @@
 #include "LibraryInventory.h"
 #include "BookInformation.h"
 #include "BorrowerInformation.h"
+#include <string>
 
 using namespace std;
 
@@ -17,17 +18,14 @@ class Menu {
 		//Menu that pops up when program is loaded
 		void MainMenu(); //will intiialize the loading of books and people
 
-		//Function to return books
-		void ReturnBook();
-
 		//Function to take books out
-		void WithdrawBook();
+		void BookTransaction(int &);
 
 		//Function to serach the inventory of books
-		void SearchBookInventory();
+		void SearchBookInventory(int &);
 
 		//Function to view borrower information
-		void ViewInfo();
+		void ViewInfo(int &);
 
 
 
