@@ -184,9 +184,10 @@ void Menu::BookTransaction(int & librarianinput)
 	}
 	else if (transactionType == 'R' || transactionType == 'r')
 	{
-		//call return book function
-		LibraryData.returnBook(CurrentBorrower, title, Date(month, day, year));
-		cout << "Book successfully returned" << endl;
+		if (LibraryData.returnBook(CurrentBorrower, title, Date(month, day, year)) == true)
+			cout << "Book has been successfully returned" << endl;
+		else
+			cout << "This book is already in the inventory" << endl;
 	}
 
 

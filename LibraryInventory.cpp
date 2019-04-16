@@ -215,28 +215,31 @@ bool LibraryInventory::returnBook(BorrowerInformation * B1, string title, Date t
 	BookInformation * book = searchInventory(title);
 
 	// if book was not found
-	if(!book)
+	if(!book || book->getStatus() != UNAVAILABLE)
 		return false;
 
-	//Check if it is late, if so add a fee to the users account
-	int daysOverdue = todaysDate.dateDiff(book->getDueDate());
-	double fee = daysOverdue * book->getFinePerDayOverdue();
-	if (daysOverdue > 0)
-		B1->setFeeBalance(fee);
+	else {
+		//Check if it is late, if so add a fee to the users account
+		int daysOverdue = todaysDate.dateDiff(book->getDueDate());
+		double fee = daysOverdue * book->getFinePerDayOverdue();
+		if (daysOverdue > 0)
+			B1->setFeeBalance(fee);
 
-	//Change the book status
-	book->setStatus(AVAILABLE);
-
-
-	//Change due date to 0
-	book->setDueDate(Date(0, 0, 0));
-
-	//Remove the book from the borrowers list
-	B1->returnBook(book);
+		//Change the book status
+		book->setStatus(AVAILABLE);
 
 
+		//Change due date to 0
+		book->setDueDate(Date(0, 0, 0));
 
-	return true;
+		//Remove the book from the borrowers list
+		B1->returnBook(book);
+
+		return true;
+	}
+
+
+
 
 
 }
