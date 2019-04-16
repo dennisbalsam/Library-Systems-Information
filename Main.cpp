@@ -13,6 +13,7 @@ int main()
 {
 	Menu menu;
 	menu.MainMenu();
+
 	system("pause");
 	return 0;
 }
