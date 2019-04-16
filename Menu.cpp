@@ -1,12 +1,10 @@
 #include "Menu.h"
-#include <iostream>
-
-using namespace std;
 
 //Main menu function
 void Menu::MainMenu()
 {
 	char librarianInput;
+	int backToMenu = 0;
 	bool backtoMenu = true;
 	//Input all data for the library
 	LibraryData.setBookInventory("book-data.csv");
@@ -14,153 +12,81 @@ void Menu::MainMenu()
 
 
 
-	//Welcoming messages
-	cout << "Welcome to the Library Master 3000" << endl;
-	cout << "What would you like to do today?: " << endl;
-	cout << "(W/w for withdrawing books)" << endl;
-	cout << "(R/r for return books)" << endl;
-	cout << "(S/s to search the inventory)" << endl;
-	cout << "(V/v to view a borrowers information)" << endl;
-	cin >> librarianInput;
-	cout << endl;
 
 	//Enter desired submenu
 	while (backtoMenu == true)
 	{
+		system("cls");
+		//Welcoming messages
+		cout << "Welcome to the Library Master 3000" << endl;
+		cout << "What would you like to do today?: " << endl;
+		cout << "(T/t for transaction of withdrawing books)" << endl;
+		cout << "(S/s to search the inventory)" << endl;
+		cout << "(V/v to view a borrowers information)" << endl;
+		cin >> librarianInput;
+		cout << endl;
+
 		switch (librarianInput)
 		{
-		case 'W':
-		case 'w':
-			this->WithdrawBook();
-			break;
-		case 'R':
-		case 'r':
-			this->ReturnBook();
+		case 'T':
+		case 't':
+			this->BookTransaction(backToMenu);
 			break;
 		case 'S':
 		case 's':
-			this->SearchBookInventory();
+			this->SearchBookInventory(backToMenu);
 			break;
 		case 'V':
 		case 'v':
-			this->ViewInfo();
+			this->ViewInfo(backToMenu);
 			break;
 		}
 
-		system("cls");
-		cout << "Would you like to go back to main menu?: (Y/y for yes, anything else terminates)";
-		cin >> librarianInput;
-		if (librarianInput == 'Y' || librarianInput == 'y')
+
+		if (backToMenu == 1)
 			backtoMenu = true;
-		else
+		else 
 			backtoMenu = false;
 
 	}
 	exit(1); 
 }
 
-//Function for returning books
-void Menu::ReturnBook()
-{   //Local variables
+
+//Function to withdraw books
+void Menu::BookTransaction(int & librarianinput)
+{
+
+
+
+
+	//Local variables
 	int month, day, year, id;
+	char transactionType;
 	string title;
 	BorrowerInformation * CurrentBorrower = nullptr;
 
+
+	// Ask if they want to return or wihthdraw a book
+	cout << "Are you returning or withdrawing a book?(R/r for return, W/w for withdraw) : ";
+	cin >> transactionType; 
+
 	//Prompt librarian for input of information
-	cout << "Please enter the 4 digit borrower ID: ";
+	cout << "Please enter the 5 digit borrower ID: ";
 	cin >> id;
-	cout << "Please Enter todays date (in format m d y): ";
-	cin >> month >> day >> year;
-	cout << "Please enter the title of the book: ";
-	cin >> title;
-	system("cls");
-
-
-	//Ensure i aproper month is entered
-	if (month < 1 || month > 12)
-	{
-		cout << "Please enter a valid month: ";
-		cin >> month;
-	}
-
-
-	//Ensure a proper day is entered
-	switch (month)
-	{
-	case 1:
-	case 3:
-	case 5:
-	case 7:
-	case 8:
-	case 10:
-	case 12:
-		if (day < 1 || day > 31)
-		{
-			cout << "Please enter a valid day: ";
-			cin >> day;
-		}
-		break;
-	case 4:
-	case 6:
-	case 9:
-	case 11:
-		if (day < 1 || day > 30)
-		{
-			cout << "Please enter a valid day: ";
-			cin >> day;
-		}
-
-		break;
-
-	case 2:
-		if (day < 1 || day > 28)
-		{
-			cout << "Please enter a valid day: ";
-			cin >> day;
-		}
-		break;
-
-		if (year < 2019)
-		{
-			cout << "Please enter a valid year";
-			cin >> year;
-		}
-	}
-		//Search for borrower
+	//Search for borrower
 	do {
+		CurrentBorrower = LibraryData.getBorrower(id);
 		if (CurrentBorrower == nullptr)
 		{
 			cout << "That is not a valid ID, please enter another ID: " << endl;
 			cin >> id;
 		}
-		CurrentBorrower = LibraryData.getBorrower(id);
 	} while (CurrentBorrower == nullptr);
-
-		//call return book function
-		LibraryData.returnBook(CurrentBorrower, title, Date(month, day, year));
-
-
-		delete CurrentBorrower;
-
-
-	
-}
-
-//Function to withdraw books
-void Menu::WithdrawBook()
-{
-	//Local variables
-	int month, day, year, id;
-	string title;
-	BorrowerInformation * CurrentBorrower = nullptr;
-
-	//Prompt librarian for input of information
-	cout << "Please enter the 4 digit borrower ID: ";
-	cin >> id;
 
 	// check if correct date format
 	bool goodDate = false;
-
+	bool leapyear = false;
 	int months31[] = {1, 3, 5, 7, 8, 10, 12};
 	int months30[] = {4, 6, 9, 11};
 	do
@@ -169,6 +95,8 @@ void Menu::WithdrawBook()
 
 		cout << "Please Enter todays date (in format m d y) ";
 		cin >> month >> day >> year;
+
+
 
 		// check month
 		if(month < 1 || month > 12)
@@ -219,74 +147,104 @@ void Menu::WithdrawBook()
 		}
 
 		// check 28 day month
-		if(month == 2 && day > 28)
+		if(month == 2)
 		{
+
+			if (year % 4 == 0 || year % 100 == 0 || year % 400 == 0)
+			{
+						leapyear = true;
+			}
+			if (day > 28 && leapyear == false)
+			{
 				cout << "Invalid day." << endl;
+				goodDate = false;
+			}
+			else if (day > 29 && leapyear == true)
+				goodDate = true;
+			else if (day > 29 && leapyear == true)
 				goodDate = false;
 		}
 
 	} while(!goodDate);
 
-	cout << "Please enter the title of the book: ";
-	cin >> title;
-	system("cls");
+
+	cout << "Please enter the title of the book: " << endl;
+	cin.ignore();
+	getline(cin, title);  //to input with whitespace
 
 
 
-		//Search for borrower
-	do {
-		CurrentBorrower = LibraryData.getBorrower(id);
-		if (CurrentBorrower == nullptr)
-		{
-			cout << "That is not a valid ID, please enter another ID: " << endl;
-			cin >> id;
-		}
-	} while (CurrentBorrower == nullptr);
+
+	if (transactionType == 'W' || transactionType == 'w')
+	{
+		if (LibraryData.withdrawBook(CurrentBorrower, title, Date(month, day, year)) == true)
+			cout << "Book has been successfully withdrawn" << endl;
+		else
+			cout << "This book is taken out already" << endl;
+	}
+	else if (transactionType == 'R' || transactionType == 'r')
+	{
 		//call return book function
-	if (LibraryData.withdrawBook(CurrentBorrower, title, Date(month, day, year)) == true)
-		cout << "Book has been successfully withdrawn" << endl;
-	else
-		cout << "This book is taken out already" << endl;
-
-		
+		LibraryData.returnBook(CurrentBorrower, title, Date(month, day, year));
+		cout << "Book successfully returned" << endl;
+	}
 
 
-	delete CurrentBorrower;
+
+
+	cout << "Please enter 1 to return to main menu || Enter anything else to terminate program: ";
+	cin >> librarianinput;
+
+
 }
 
 //Function to search the book inventory
-void Menu::SearchBookInventory()
+void Menu::SearchBookInventory(int & librarianinput)
 {	
 	//Local variables
 	string title;
 	BookInformation * CurrentBook = nullptr;
-	char input;
+	char choice;
+	cout << "Would you like to view the entire inventory or serach for a particular book?" << endl;
+	cout << "A/a for all books || B/b for particular book" << endl;
+	cin >> choice;
 
-	//Prompt for title
-	cout << "What is the title of the book you wish to search for?: " << endl;
-	cin >> title;
 
-	
-	do
+	if (choice == 'A' || choice == 'a')
 	{
-		CurrentBook = LibraryData.searchInventory(title);
-		if (CurrentBook == nullptr)
-		{
-			cout << "we don't have that book in our library, please enter another book: " << endl;
-			cin >> title;
-		}
-	} while (CurrentBook == nullptr);
+		cout << "ALL BOOKS IN LIBRARY" << endl;
+		cout << "----------------------------" << endl;
+		LibraryData.printBookInventory();
+	}
+	
+	else if (choice == 'B' || choice == 'b')
+	{
 	
 
-	cout << "This book is \" " << CurrentBook->getTitle() << "\"" << endl;
-	cout << "The author is: " << CurrentBook->getAuthor() << endl;
-	cout << "The subject is: " << CurrentBook->getSubject() << endl;
-	cout << "Its status is " << CurrentBook->getStatus() << endl;
+		cout << "Please enter the title of the book: " << endl;
+		cin.ignore();
+		getline(cin, title);  //to input with whitespace
 
-	system("cls"); 
+
+		do
+		{
+			CurrentBook = LibraryData.searchInventory(title);
+			if (CurrentBook == nullptr)
+			{
+				cout << "we don't have that book in our library, please enter another book: " << endl;
+				getline(cin, title);
+			}
+		} while (CurrentBook == nullptr);
+
+		cout << *CurrentBook;
+
+	}
+	cout << "Please enter 1 to return to main menu || Enter anything else to terminate program: ";
+	cin >> librarianinput;
+
 }
 
-void Menu::ViewInfo()
+void Menu::ViewInfo(int & librarianinput)
 {
 	//Local variables
 	int id;
@@ -318,7 +276,7 @@ void Menu::ViewInfo()
 		cout << "Enter your phone number: ";
 		cin >> phonenumber;
 		cout << endl;
-		cout << "Enter an ID: ";
+		cout << "Enter a 5 digit ID: ";
 		cin >> id;
 
 		//Add the user to the BorrowerList
@@ -330,7 +288,7 @@ void Menu::ViewInfo()
 	case 'I':
 	case 'i':
 		//Ask the borrower for their ID, and input it to the system
-		cout << "Enter the users ID: " ;
+		cout << "Enter the 5 digit user ID: " ;
 		cin >> id;
 
 		//Search for User
@@ -343,13 +301,13 @@ void Menu::ViewInfo()
 			}
 		} while (CurrentBorrower == nullptr);
 		//Output UserInfo
-		cout << "Borrower Name: " << CurrentBorrower->getName() << endl;
-		cout << "Borrower Address: " << CurrentBorrower->getAddress() << endl;
-		cout << "Borrower Phone Number: " << CurrentBorrower->getPhoneNumber() << endl;
-		cout << "Borrower ID: " << CurrentBorrower->getId() << endl;
-		cout << "Borrower Fees Owed: " << CurrentBorrower->getFeeBalance() << endl;
-		cout << "Amount of Books the Borrower currently has: " << CurrentBorrower->getBookAmount(); 
+		cout << *CurrentBorrower;
 
 		break;
 	}
+
+
+	cout << "Please enter 1 to return to main menu || Enter anything else to terminate program: ";
+	cin >> librarianinput;
+
 }
