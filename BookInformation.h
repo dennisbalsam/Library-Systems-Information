@@ -3,6 +3,7 @@
 #include <string>
 #include "Date.h"
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
 // book statuses
@@ -41,8 +42,21 @@ public:
 		os << "Circulation period: " << b.getCirculationPeriod() << endl;
 		os << "Location: " << b.getLocation() << endl;
 		os << "ID: " << b.getID() << endl;
-		os << "Cost: " << b.getCostOfBook() << endl;
-		os << "Overdue fine: " << b.getFinePerDayOverdue() << endl;
+		cout << fixed << showpoint << setprecision(2);
+		os << "Cost: " << "$" << b.getCostOfBook() << endl;
+		os << "Overdue fine: " << "$:" << b.getFinePerDayOverdue() << endl;
+		string status;
+			if (b.getStatus() == 0)
+				status = "Unavilable";
+			else if (b.getStatus() == 1)
+				status = "Available";
+
+			else if (b.getStatus() == 2)
+				status == "Hold";
+			else if (b.getStatus() == 3)
+				status = "Maintenance";
+
+			os << "Status: "<< status << endl;
 		return os;
 	}
 
