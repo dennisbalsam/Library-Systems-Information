@@ -48,8 +48,21 @@ class LibraryInventory
 			// functions to display lists
 			void printBookInventory()
 			{
-				for( auto book : BookInventory)
-					cout << book.getTitle() << endl;
+				string status;
+				for (auto book : BookInventory)
+				{
+					if (book.getStatus() == 0)
+						status = "Unavilable";
+					else if (book.getStatus() == 1)
+						status = "Available";
+
+					else if (book.getStatus() == 2)
+						status == "Hold";
+					else if (book.getStatus() == 3)
+						status = "Maintenance";
+
+					cout << book.getTitle() << " - " << status << endl;
+				}
 			};
 			void printBorrowerList()
 			{
