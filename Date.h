@@ -1,7 +1,7 @@
 #pragma once
 
 #include <iostream>
-
+#include <windows.h>
 using namespace std;
 
 class Date
@@ -64,10 +64,21 @@ public:
 				}
 				break;
 			case 2:
-				if (day > 28)
+				if (year % 4 == 0 || year % 100 == 0 || year % 400 == 0)
 				{
-					month++;
-					day = day - 28;
+					if (day > 29)
+					{
+						month++;
+						day = day - 29;
+					}
+
+				}
+				else {
+					if (day > 28)
+					{
+						month++;
+						day = day - 28;
+					}
 				}
 
 
@@ -77,11 +88,53 @@ public:
 	}
 	int dateDiff(Date D2)
 	{
-
-		int daysinyear[] = {0,31,59,90,120,151,181,212,243,273,304,334,365 };
-
 		int days;
-		days = (daysinyear[month - 1] + day) - (daysinyear[D2.month - 1] + (D2.day));
+
+		int yearDifference;
+
+		//Check if the year is a leap year
+		if (year % 4 == 0 || year % 100 == 0 || year % 400 == 0)
+		{
+			int daysinyear[] = { 0,31,60,91,121,152,182,213,244,274,305,335,366 };
+			yearDifference = (year - D2.year);
+			if (yearDifference >= 1)
+			{
+				//variables to help calculate days
+				int daysinoriginalyear, additionaldays;
+				//calculate days in previous year
+				daysinoriginalyear = (365 - ((daysinyear[D2.month - 1] + D2.day)));
+				//calculate days in new year
+				additionaldays = (yearDifference * 365) - (365 - day);
+				// add up the days to get toal days overdue
+				days = daysinoriginalyear + additionaldays;
+			}
+			else
+			{
+				days = (daysinyear[month - 1] + day) - (daysinyear[D2.month - 1] + (D2.day));
+				cout << days;
+			}
+		}
+
+		else {
+			int daysinyear[] = { 0,31,59,90,120,151,181,212,243,273,304,334,365 };
+			yearDifference = (year - D2.year);
+			if (yearDifference >= 1)
+			{
+				//variables to help calculate days
+				int daysinoriginalyear, additionaldays;
+				//calculate days in previous year
+				daysinoriginalyear = (365 - ((daysinyear[D2.month - 1] + D2.day)));
+				//calculate days in new year
+				additionaldays = (yearDifference * 365) - (365 - day);
+				// add up the days to get toal days overdue
+				days = daysinoriginalyear + additionaldays;
+			}
+			else
+			{
+				days = (daysinyear[month - 1] + day) - (daysinyear[D2.month - 1] + (D2.day));
+				cout << days;
+			}
+		}
 		return days;
 	}
 };
