@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 #include "BookInformation.h"
-
+#include <iomanip>
 using namespace std;
 
 class BorrowerInformation
@@ -27,7 +27,8 @@ public:
 		cout << "Address: " << b.address << endl;
 		cout << "Phone Number: " << b.phoneNumber << endl;
 		cout << "ID: " << b.id << endl;
-		cout << "Fee balance: " << b.feeBalance << endl;
+		cout << fixed << showpoint << setprecision(2);
+		cout << "Fee balance: " << "$" <<  b.feeBalance << endl;
 		cout << "Books withdrawn: " << b.getBookAmount() << endl;
 		cout << "List of books withdrawn: " << endl;
 		for(auto book : b.books)
