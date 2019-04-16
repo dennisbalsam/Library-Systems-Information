@@ -22,8 +22,8 @@ BookInformation *LibraryInventory::searchInventory(string title)
 			return &BookInventory[x];
 		}
 	}
-
 	return nullptr; // book was not found
+
 }
 
 //Function to serach for borrower
@@ -193,19 +193,18 @@ bool LibraryInventory::withdrawBook(BorrowerInformation * B1, string title, Date
 
 		//Set the due date based on the circulation period and the current date
 		book->setStatus(UNAVAILABLE);
-		book->setCirculationPeriod(14);
+		book->setCirculationPeriod(book->getCirculationPeriod());
 		//Set the due date, and fine per day
 		todaysDate.increaseDate(book->getCirculationPeriod());
 
 		book->setDueDate(todaysDate);
-		book->setFinePerDayOverdue(3.00);
+		book->setFinePerDayOverdue(book->getFinePerDayOverdue());
 
 		//Add the book to the list of books the borrower has
 		B1->addBook(book);
 
 		return true;
 
-		delete book;
 	}
 }
 
@@ -228,8 +227,6 @@ bool LibraryInventory::returnBook(BorrowerInformation * B1, string title, Date t
 	//Change the book status
 	book->setStatus(AVAILABLE);
 
-	//Change circulation period to 0
-	book->setCirculationPeriod(0);
 
 	//Change due date to 0
 	book->setDueDate(Date(0, 0, 0));
@@ -237,7 +234,7 @@ bool LibraryInventory::returnBook(BorrowerInformation * B1, string title, Date t
 	//Remove the book from the borrowers list
 	B1->returnBook(book);
 
-	delete book;
+
 
 	return true;
 
@@ -255,3 +252,5 @@ void LibraryInventory::addBorrower(string name, string address, string phonenumb
 
 
 }
+
+
