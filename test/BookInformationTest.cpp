@@ -99,10 +99,5 @@ int main()
     b.setFinePerDayOverdue();
     cout << "\t" << b.getFinePerDayOverdue() << endl;
 
-    // testing other functions
-    cout << "\nTesting other functions: \n" << endl;
-    cout << "b.print();" << endl;
-    b.print();
-
     return 0;
 }

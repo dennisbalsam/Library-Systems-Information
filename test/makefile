@@ -1,19 +1,20 @@
 CC = clang++
 FLAGS = -std=c++11
 SRC = ../src
+COMPILE = $(CC) $(FLAGS) $^ -o $@
 BIN = bin
 
 $(BIN)/BookInformationTest : BookInformationTest.cpp ../BookInformation.cpp
-	$(CC) $(FLAGS) $^ -o $@
+	$(COMPILE)
 
 $(BIN)/BorrowerInformationTest : BorrowerInformationTest.cpp
-	$(CC) $(FLAGS) $^ -o $@
+	$(COMPILE)
 
 $(BIN)/dataImportTest : dataImportTest.cpp ../LibraryInventory.cpp ../BookInformation.cpp
-	$(CC) $(FLAGS) $^ -o $@
+	$(COMPILE)
 
 $(BIN)/dateTest : dateTest.cpp
-	$(CC) $(FLAGS) $^ -o $@
+	$(COMPILE)
 
 clean:
 	rm $(BIN)/*
