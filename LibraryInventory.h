@@ -15,14 +15,12 @@ class LibraryInventory
 		vector<BookInformation> BookInventory;
 		vector<BorrowerInformation> BorrowerList; 
 		//Int to keep track of amount of books in the inventory
-		int quantity;
+
 		
 
 	public:
 
-		//Gets and sets
-		int getQuantity() { return quantity; };
-		void setQuantity(int quantity) { this->quantity = quantity; };
+
 		
 		//Search the inventory of books
 			BookInformation * searchInventory(string title);
