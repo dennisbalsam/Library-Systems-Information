@@ -255,8 +255,8 @@ void Menu::ViewInfo(int & librarianinput)
 
 
 	//Librarian input
-	cout << "Would you like to add a user or view a current users information? " << endl;
-	cout << "(A/a) to Add user, (I/i) for an existing users info: ";
+	cout << "Would you like to add a user or view a current users information or view entire borrower list? " << endl;
+	cout << "(A/a) to Add user, (I/i) for an existing users info, (E/e) for Entire List:" << endl;
 	cin >> input;
 
 	switch (input)
@@ -289,7 +289,7 @@ void Menu::ViewInfo(int & librarianinput)
 	case 'I':
 	case 'i':
 		//Ask the borrower for their ID, and input it to the system
-		cout << "Enter the 5 digit user ID: " ;
+		cout << "Enter the 5 digit user ID: ";
 		cin >> id;
 
 		//Search for User
@@ -305,8 +305,12 @@ void Menu::ViewInfo(int & librarianinput)
 		cout << *CurrentBorrower;
 
 		break;
-	}
 
+	case 'E':
+	case 'e':
+		LibraryData.printBorrowerList();
+		break;
+	}
 
 	cout << "Please enter 1 to return to main menu || Enter anything else to terminate program: ";
 	cin >> librarianinput;
