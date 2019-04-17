@@ -55,7 +55,7 @@ class LibraryInventory
 						status = "Available";
 
 					else if (book.getStatus() == 2)
-						status == "Hold";
+						status = "Hold";
 					else if (book.getStatus() == 3)
 						status = "Maintenance";
 

@@ -52,7 +52,7 @@ public:
 				status = "Available";
 
 			else if (b.getStatus() == 2)
-				status == "Hold";
+				status = "Hold";
 			else if (b.getStatus() == 3)
 				status = "Maintenance";
 
