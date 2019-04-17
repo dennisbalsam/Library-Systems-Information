@@ -28,8 +28,8 @@ INSTRUCTIONS:
 - No matter which one you click, after that action is finished you will be prompted to enter 1 to go back to the main menu, anything else will terminate the program
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 SOME PROBLEMS WE RAN INTO:
-Completing this program was quite fun, but also quite extensive, and slightly diffuclt. One of the main problems we had was insuring each of the classes worked smoothly
-with one another while using composition. For example, there was an an instance when we trying to search for a specific objetc in the vectors, but we were not recieving data
+Completing this program was quite fun, but also quite extensive, and slightly difficult. One of the main problems we had was insuring each of the classes worked smoothly
+with one another while using composition. For example, there was an an instance where we were trying to search for a specific object in the vectors, but we were not recieving data
 from it, and then after some debugging the change that was needed was to return a pointer to the address of the object, and then we were able to pull data from the object. 
 Another problem that occured while coding was insuring we were running the proper tests in order to be certain that the program would run well, such as checking if a book
 exists, checking if a borrower exists, and making sure dates are valid.   
