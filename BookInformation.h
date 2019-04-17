@@ -98,5 +98,5 @@ public:
 	double getCostOfBook();
 	double getFinePerDayOverdue();
 
-	void print();
+
 };
