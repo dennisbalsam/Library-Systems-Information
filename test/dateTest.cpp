@@ -58,9 +58,38 @@ int main()
     cout << d.getYear() << endl;
     cout << endl;
 
+    // Testing overloaded << for date objects
     cout << "Testing overloaded << for date objects:" << endl;
     cout << "cout << d << endl;" << endl;
     cout << d << endl;
+    cout << endl;
+
+    // testing increaseDate function
+    cout << "testing increaseDate function:" << endl;
+	cout << "increaseDate (int days)" << endl;
+    cout << endl;
+
+    // months with 31 days
+    int month31[] = {1, 3, 5, 7, 8, 10, 12};
+    // months with 30 days
+    int month30[] = {4, 6, 9, 11};
+
+    cout << "Testing increaseDate with 31 day months:" << endl;
+
+     cout << "d.setDate(month, 31, 2020)" << endl;
+    for(auto month : month31)
+    {
+        cout << "-------------------" << endl;
+        d.setDate(month, 31, 2020);
+        cout << "Month: " << d.getMonth() << endl;
+        cout << "Before increaseDate" << endl;
+        cout << d << endl;
+        cout << "After increaseDate" << endl;
+        d.increaseDate(1);
+        cout << d << endl;
+        cout << "-------------------" << endl;
+
+    }
 
     return 0;
 }
