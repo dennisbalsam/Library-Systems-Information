@@ -12,5 +12,8 @@ $(BIN)/BorrowerInformationTest : BorrowerInformationTest.cpp
 $(BIN)/dataImportTest : dataImportTest.cpp ../LibraryInventory.cpp ../BookInformation.cpp
 	$(CC) $(FLAGS) $^ -o $@
 
+$(BIN)/dateTest : dateTest.cpp
+	$(CC) $(FLAGS) $^ -o $@
+
 clean:
 	rm $(BIN)/*
