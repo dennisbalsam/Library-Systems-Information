@@ -98,5 +98,4 @@ public:
 	double getCostOfBook();
 	double getFinePerDayOverdue();
 
-
 };
