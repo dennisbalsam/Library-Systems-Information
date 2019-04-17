@@ -20,7 +20,7 @@ void Menu::MainMenu()
 		//Welcoming messages
 		cout << "Welcome to the Library Master 3000" << endl;
 		cout << "What would you like to do today?: " << endl;
-		cout << "(T/t for transaction of withdrawing books)" << endl;
+		cout << "(T/t for transaction of withdrawing/returning books)" << endl;
 		cout << "(S/s to search the inventory)" << endl;
 		cout << "(V/v to view a borrowers information)" << endl;
 		cin >> librarianInput;
