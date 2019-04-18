@@ -16,5 +16,8 @@ $(BIN)/dataImportTest : dataImportTest.cpp ../LibraryInventory.cpp ../BookInform
 $(BIN)/dateTest : dateTest.cpp
 	$(COMPILE)
 
+$(BIN)/LibraryInventoryTest : LibraryInventoryTest.cpp ../LibraryInventory.cpp ../BookInformation.cpp
+	$(COMPILE)
+
 clean:
 	rm $(BIN)/*
